@@ -1,0 +1,4004 @@
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle.properties ---
+# Project-wide Gradle settings.
+# IDE (e.g. Android Studio) users:
+# Gradle settings configured through the IDE *will override*
+# any settings specified in this file.
+# For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. For more details, visit
+# https://developer.android.com/r/tools/gradle-multi-project-decoupled-projects
+# org.gradle.parallel=true
+# AndroidX package structure to make it clearer which packages are bundled with the
+# Android operating system, and which are packaged with your app's APK
+# https://developer.android.com/topic/libraries/support-library/androidx-rn
+android.useAndroidX=true
+# Kotlin code style for this project: "official" or "obsolete":
+kotlin.code.style=official
+# Enables namespacing of each library's R class so that its R class includes only the
+# resources declared in the library itself and none from the library's dependencies,
+# thereby reducing the size of the R class for that library
+android.nonTransitiveRClass=true
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle.properties ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradlew ---
+#!/usr/bin/env sh
+
+#
+# Copyright 2015 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+##############################################################################
+##
+##  Gradle start up script for UN*X
+##
+##############################################################################
+
+# Attempt to set APP_HOME
+# Resolve links: $0 may be a link
+PRG="$0"
+# Need this for relative symlinks.
+while [ -h "$PRG" ] ; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '/.*' > /dev/null; then
+        PRG="$link"
+    else
+        PRG=`dirname "$PRG"`"/$link"
+    fi
+done
+SAVED="`pwd`"
+cd "`dirname \"$PRG\"`/" >/dev/null
+APP_HOME="`pwd -P`"
+cd "$SAVED" >/dev/null
+
+APP_NAME="Gradle"
+APP_BASE_NAME=`basename "$0"`
+
+# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+
+# Use the maximum available, or set MAX_FD != -1 to use that value.
+MAX_FD="maximum"
+
+warn () {
+    echo "$*"
+}
+
+die () {
+    echo
+    echo "$*"
+    echo
+    exit 1
+}
+
+# OS specific support (must be 'true' or 'false').
+cygwin=false
+msys=false
+darwin=false
+nonstop=false
+case "`uname`" in
+  CYGWIN* )
+    cygwin=true
+    ;;
+  Darwin* )
+    darwin=true
+    ;;
+  MINGW* )
+    msys=true
+    ;;
+  NONSTOP* )
+    nonstop=true
+    ;;
+esac
+
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+
+# Determine the Java command to use to start the JVM.
+if [ -n "$JAVA_HOME" ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+        # IBM's JDK on AIX uses strange locations for the executables
+        JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+        JAVACMD="$JAVA_HOME/bin/java"
+    fi
+    if [ ! -x "$JAVACMD" ] ; then
+        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+    fi
+else
+    JAVACMD="java"
+    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+fi
+
+# Increase the maximum file descriptors if we can.
+if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
+    MAX_FD_LIMIT=`ulimit -H -n`
+    if [ $? -eq 0 ] ; then
+        if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+            MAX_FD="$MAX_FD_LIMIT"
+        fi
+        ulimit -n $MAX_FD
+        if [ $? -ne 0 ] ; then
+            warn "Could not set maximum file descriptor limit: $MAX_FD"
+        fi
+    else
+        warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+    fi
+fi
+
+# For Darwin, add options to specify how the application appears in the dock
+if $darwin; then
+    GRADLE_OPTS="$GRADLE_OPTS \"-Xdock:name=$APP_NAME\" \"-Xdock:icon=$APP_HOME/media/gradle.icns\""
+fi
+
+# For Cygwin or MSYS, switch paths to Windows format before running java
+if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
+    APP_HOME=`cygpath --path --mixed "$APP_HOME"`
+    CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+
+    JAVACMD=`cygpath --unix "$JAVACMD"`
+
+    # We build the pattern for arguments to be converted via cygpath
+    ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
+    SEP=""
+    for dir in $ROOTDIRSRAW ; do
+        ROOTDIRS="$ROOTDIRS$SEP$dir"
+        SEP="|"
+    done
+    OURCYGPATTERN="(^($ROOTDIRS))"
+    # Add a user-defined pattern to the cygpath arguments
+    if [ "$GRADLE_CYGPATTERN" != "" ] ; then
+        OURCYGPATTERN="$OURCYGPATTERN|($GRADLE_CYGPATTERN)"
+    fi
+    # Now convert the arguments - kludge to limit ourselves to /bin/sh
+    i=0
+    for arg in "$@" ; do
+        CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
+        CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
+
+        if [ $CHECK -ne 0 ] && [ $CHECK2 -eq 0 ] ; then                    ### Added a condition
+            eval `echo args$i`=`cygpath --path --ignore --mixed "$arg"`
+        else
+            eval `echo args$i`="\"$arg\""
+        fi
+        i=`expr $i + 1`
+    done
+    case $i in
+        0) set -- ;;
+        1) set -- "$args0" ;;
+        2) set -- "$args0" "$args1" ;;
+        3) set -- "$args0" "$args1" "$args2" ;;
+        4) set -- "$args0" "$args1" "$args2" "$args3" ;;
+        5) set -- "$args0" "$args1" "$args2" "$args3" "$args4" ;;
+        6) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" ;;
+        7) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" ;;
+        8) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" ;;
+        9) set -- "$args0" "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7" "$args8" ;;
+    esac
+fi
+
+# Escape application args
+save () {
+    for i do printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/" ; done
+    echo " "
+}
+APP_ARGS=`save "$@"`
+
+# Collect all arguments for the java command, following the shell quoting and substitution rules
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "\"-Dorg.gradle.appname=$APP_BASE_NAME\"" -classpath "\"$CLASSPATH\"" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
+
+exec "$JAVACMD" "$@"
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradlew ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradlew.bat ---
+@rem
+@rem Copyright 2015 the original author or authors.
+@rem
+@rem Licensed under the Apache License, Version 2.0 (the "License");
+@rem you may not use this file except in compliance with the License.
+@rem You may obtain a copy of the License at
+@rem
+@rem      https://www.apache.org/licenses/LICENSE-2.0
+@rem
+@rem Unless required by applicable law or agreed to in writing, software
+@rem distributed under the License is distributed on an "AS IS" BASIS,
+@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+@rem See the License for the specific language governing permissions and
+@rem limitations under the License.
+@rem
+
+@if "%DEBUG%" == "" @echo off
+@rem ##########################################################################
+@rem
+@rem  Gradle startup script for Windows
+@rem
+@rem ##########################################################################
+
+@rem Set local scope for the variables with windows NT shell
+if "%OS%"=="Windows_NT" setlocal
+
+set DIRNAME=%~dp0
+if "%DIRNAME%" == "" set DIRNAME=.
+set APP_BASE_NAME=%~n0
+set APP_HOME=%DIRNAME%
+
+@rem Resolve any "." and ".." in APP_HOME to make it shorter.
+for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
+
+@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
+
+@rem Find java.exe
+if defined JAVA_HOME goto findJavaFromJavaHome
+
+set JAVA_EXE=java.exe
+%JAVA_EXE% -version >NUL 2>&1
+if "%ERRORLEVEL%" == "0" goto execute
+
+echo.
+echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+echo.
+echo Please set the JAVA_HOME variable in your environment to match the
+echo location of your Java installation.
+
+goto fail
+
+:findJavaFromJavaHome
+set JAVA_HOME=%JAVA_HOME:"=%
+set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+
+if exist "%JAVA_EXE%" goto execute
+
+echo.
+echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+echo.
+echo Please set the JAVA_HOME variable in your environment to match the
+echo location of your Java installation.
+
+goto fail
+
+:execute
+@rem Setup the command line
+
+set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+
+
+@rem Execute Gradle
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+
+:end
+@rem End local scope for the variables with windows NT shell
+if "%ERRORLEVEL%"=="0" goto mainEnd
+
+:fail
+rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+rem the _cmd.exe /c_ return code!
+if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+exit /b 1
+
+:mainEnd
+if "%OS%"=="Windows_NT" endlocal
+
+:omega
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradlew.bat ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\local.properties ---
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+#Sat Nov 16 11:58:00 UZT 2024
+sdk.dir=C\:\\Users\\Bobur\\AppData\\Local\\Android\\Sdk
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\local.properties ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\settings.gradle.kts ---
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "command-work-15.11"
+include(":app")
+ 
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\settings.gradle.kts ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\config.properties ---
+#Sat Nov 16 11:57:59 UZT 2024
+java.home=C\:\\Program Files\\Android\\Android Studio\\jbr
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\config.properties ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\file-system.probe
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\gc.properties ---
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\gc.properties ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\checksums\checksums.lock
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\gc.properties ---
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\gc.properties ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\metadata.bin
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidPluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxActivityLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxComposeLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxCoreLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxEspressoLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxLifecycleLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxLifecycleRuntimeLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxUiLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxUiTestLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$AndroidxUiToolingLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$BundleAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$KotlinPluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$PluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs$VersionAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibs.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidPluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxActivityLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxComposeLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxCoreLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxEspressoLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxLifecycleLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxLifecycleRuntimeLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxUiLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxUiTestLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$AndroidxUiToolingLibraryAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$BundleAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$KotlinPluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$PluginAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock$VersionAccessors.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\classes\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock.class
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\sources\org\gradle\accessors\dm\LibrariesForLibs.java ---
+package org.gradle.accessors.dm;
+
+import org.gradle.api.NonNullApi;
+import org.gradle.api.artifacts.MinimalExternalModuleDependency;
+import org.gradle.plugin.use.PluginDependency;
+import org.gradle.api.artifacts.ExternalModuleDependencyBundle;
+import org.gradle.api.artifacts.MutableVersionConstraint;
+import org.gradle.api.provider.Provider;
+import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.internal.catalog.AbstractExternalDependencyFactory;
+import org.gradle.api.internal.catalog.DefaultVersionCatalog;
+import java.util.Map;
+import org.gradle.api.internal.attributes.ImmutableAttributesFactory;
+import org.gradle.api.internal.artifacts.dsl.CapabilityNotationParser;
+import javax.inject.Inject;
+
+/**
+ * A catalog of dependencies accessible via the {@code libs} extension.
+ */
+@NonNullApi
+public class LibrariesForLibs extends AbstractExternalDependencyFactory {
+
+    private final AbstractExternalDependencyFactory owner = this;
+    private final AndroidxLibraryAccessors laccForAndroidxLibraryAccessors = new AndroidxLibraryAccessors(owner);
+    private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
+    private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
+    private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
+
+    @Inject
+    public LibrariesForLibs(DefaultVersionCatalog config, ProviderFactory providers, ObjectFactory objects, ImmutableAttributesFactory attributesFactory, CapabilityNotationParser capabilityNotationParser) {
+        super(config, providers, objects, attributesFactory, capabilityNotationParser);
+    }
+
+    /**
+     * Dependency provider for <b>junit</b> with <b>junit:junit</b> coordinates and
+     * with version reference <b>junit</b>
+     * <p>
+     * This dependency was declared in catalog libs.versions.toml
+     */
+    public Provider<MinimalExternalModuleDependency> getJunit() {
+        return create("junit");
+    }
+
+    /**
+     * Group of libraries at <b>androidx</b>
+     */
+    public AndroidxLibraryAccessors getAndroidx() {
+        return laccForAndroidxLibraryAccessors;
+    }
+
+    /**
+     * Group of versions at <b>versions</b>
+     */
+    public VersionAccessors getVersions() {
+        return vaccForVersionAccessors;
+    }
+
+    /**
+     * Group of bundles at <b>bundles</b>
+     */
+    public BundleAccessors getBundles() {
+        return baccForBundleAccessors;
+    }
+
+    /**
+     * Group of plugins at <b>plugins</b>
+     */
+    public PluginAccessors getPlugins() {
+        return paccForPluginAccessors;
+    }
+
+    public static class AndroidxLibraryAccessors extends SubDependencyFactory {
+        private final AndroidxActivityLibraryAccessors laccForAndroidxActivityLibraryAccessors = new AndroidxActivityLibraryAccessors(owner);
+        private final AndroidxComposeLibraryAccessors laccForAndroidxComposeLibraryAccessors = new AndroidxComposeLibraryAccessors(owner);
+        private final AndroidxCoreLibraryAccessors laccForAndroidxCoreLibraryAccessors = new AndroidxCoreLibraryAccessors(owner);
+        private final AndroidxEspressoLibraryAccessors laccForAndroidxEspressoLibraryAccessors = new AndroidxEspressoLibraryAccessors(owner);
+        private final AndroidxLifecycleLibraryAccessors laccForAndroidxLifecycleLibraryAccessors = new AndroidxLifecycleLibraryAccessors(owner);
+        private final AndroidxUiLibraryAccessors laccForAndroidxUiLibraryAccessors = new AndroidxUiLibraryAccessors(owner);
+
+        public AndroidxLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>appcompat</b> with <b>androidx.appcompat:appcompat</b> coordinates and
+         * with version reference <b>appcompat</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getAppcompat() {
+            return create("androidx.appcompat");
+        }
+
+        /**
+         * Dependency provider for <b>junit</b> with <b>androidx.test.ext:junit</b> coordinates and
+         * with version reference <b>junitVersion</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getJunit() {
+            return create("androidx.junit");
+        }
+
+        /**
+         * Dependency provider for <b>material3</b> with <b>androidx.compose.material3:material3</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getMaterial3() {
+            return create("androidx.material3");
+        }
+
+        /**
+         * Group of libraries at <b>androidx.activity</b>
+         */
+        public AndroidxActivityLibraryAccessors getActivity() {
+            return laccForAndroidxActivityLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.compose</b>
+         */
+        public AndroidxComposeLibraryAccessors getCompose() {
+            return laccForAndroidxComposeLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.core</b>
+         */
+        public AndroidxCoreLibraryAccessors getCore() {
+            return laccForAndroidxCoreLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.espresso</b>
+         */
+        public AndroidxEspressoLibraryAccessors getEspresso() {
+            return laccForAndroidxEspressoLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.lifecycle</b>
+         */
+        public AndroidxLifecycleLibraryAccessors getLifecycle() {
+            return laccForAndroidxLifecycleLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui</b>
+         */
+        public AndroidxUiLibraryAccessors getUi() {
+            return laccForAndroidxUiLibraryAccessors;
+        }
+
+    }
+
+    public static class AndroidxActivityLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxActivityLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>compose</b> with <b>androidx.activity:activity-compose</b> coordinates and
+         * with version reference <b>activityCompose</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getCompose() {
+            return create("androidx.activity.compose");
+        }
+
+    }
+
+    public static class AndroidxComposeLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxComposeLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>bom</b> with <b>androidx.compose:compose-bom</b> coordinates and
+         * with version reference <b>composeBom</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getBom() {
+            return create("androidx.compose.bom");
+        }
+
+    }
+
+    public static class AndroidxCoreLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxCoreLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ktx</b> with <b>androidx.core:core-ktx</b> coordinates and
+         * with version reference <b>coreKtx</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getKtx() {
+            return create("androidx.core.ktx");
+        }
+
+    }
+
+    public static class AndroidxEspressoLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxEspressoLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>core</b> with <b>androidx.test.espresso:espresso-core</b> coordinates and
+         * with version reference <b>espressoCore</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getCore() {
+            return create("androidx.espresso.core");
+        }
+
+    }
+
+    public static class AndroidxLifecycleLibraryAccessors extends SubDependencyFactory {
+        private final AndroidxLifecycleRuntimeLibraryAccessors laccForAndroidxLifecycleRuntimeLibraryAccessors = new AndroidxLifecycleRuntimeLibraryAccessors(owner);
+
+        public AndroidxLifecycleLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Group of libraries at <b>androidx.lifecycle.runtime</b>
+         */
+        public AndroidxLifecycleRuntimeLibraryAccessors getRuntime() {
+            return laccForAndroidxLifecycleRuntimeLibraryAccessors;
+        }
+
+    }
+
+    public static class AndroidxLifecycleRuntimeLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxLifecycleRuntimeLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ktx</b> with <b>androidx.lifecycle:lifecycle-runtime-ktx</b> coordinates and
+         * with version reference <b>lifecycleRuntimeKtx</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getKtx() {
+            return create("androidx.lifecycle.runtime.ktx");
+        }
+
+    }
+
+    public static class AndroidxUiLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+        private final AndroidxUiTestLibraryAccessors laccForAndroidxUiTestLibraryAccessors = new AndroidxUiTestLibraryAccessors(owner);
+        private final AndroidxUiToolingLibraryAccessors laccForAndroidxUiToolingLibraryAccessors = new AndroidxUiToolingLibraryAccessors(owner);
+
+        public AndroidxUiLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ui</b> with <b>androidx.compose.ui:ui</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            return create("androidx.ui");
+        }
+
+        /**
+         * Dependency provider for <b>graphics</b> with <b>androidx.compose.ui:ui-graphics</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getGraphics() {
+            return create("androidx.ui.graphics");
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui.test</b>
+         */
+        public AndroidxUiTestLibraryAccessors getTest() {
+            return laccForAndroidxUiTestLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui.tooling</b>
+         */
+        public AndroidxUiToolingLibraryAccessors getTooling() {
+            return laccForAndroidxUiToolingLibraryAccessors;
+        }
+
+    }
+
+    public static class AndroidxUiTestLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxUiTestLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>junit4</b> with <b>androidx.compose.ui:ui-test-junit4</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getJunit4() {
+            return create("androidx.ui.test.junit4");
+        }
+
+        /**
+         * Dependency provider for <b>manifest</b> with <b>androidx.compose.ui:ui-test-manifest</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getManifest() {
+            return create("androidx.ui.test.manifest");
+        }
+
+    }
+
+    public static class AndroidxUiToolingLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+
+        public AndroidxUiToolingLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>tooling</b> with <b>androidx.compose.ui:ui-tooling</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            return create("androidx.ui.tooling");
+        }
+
+        /**
+         * Dependency provider for <b>preview</b> with <b>androidx.compose.ui:ui-tooling-preview</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getPreview() {
+            return create("androidx.ui.tooling.preview");
+        }
+
+    }
+
+    public static class VersionAccessors extends VersionFactory  {
+
+        public VersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Version alias <b>activityCompose</b> with value <b>1.9.3</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getActivityCompose() { return getVersion("activityCompose"); }
+
+        /**
+         * Version alias <b>agp</b> with value <b>8.7.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getAgp() { return getVersion("agp"); }
+
+        /**
+         * Version alias <b>appcompat</b> with value <b>1.7.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getAppcompat() { return getVersion("appcompat"); }
+
+        /**
+         * Version alias <b>composeBom</b> with value <b>2024.04.01</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getComposeBom() { return getVersion("composeBom"); }
+
+        /**
+         * Version alias <b>coreKtx</b> with value <b>1.13.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getCoreKtx() { return getVersion("coreKtx"); }
+
+        /**
+         * Version alias <b>espressoCore</b> with value <b>3.6.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
+
+        /**
+         * Version alias <b>junit</b> with value <b>4.13.2</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getJunit() { return getVersion("junit"); }
+
+        /**
+         * Version alias <b>junitVersion</b> with value <b>1.2.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getJunitVersion() { return getVersion("junitVersion"); }
+
+        /**
+         * Version alias <b>kotlin</b> with value <b>2.0.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getKotlin() { return getVersion("kotlin"); }
+
+        /**
+         * Version alias <b>lifecycleRuntimeKtx</b> with value <b>2.8.6</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getLifecycleRuntimeKtx() { return getVersion("lifecycleRuntimeKtx"); }
+
+    }
+
+    public static class BundleAccessors extends BundleFactory {
+
+        public BundleAccessors(ObjectFactory objects, ProviderFactory providers, DefaultVersionCatalog config, ImmutableAttributesFactory attributesFactory, CapabilityNotationParser capabilityNotationParser) { super(objects, providers, config, attributesFactory, capabilityNotationParser); }
+
+    }
+
+    public static class PluginAccessors extends PluginFactory {
+        private final AndroidPluginAccessors paccForAndroidPluginAccessors = new AndroidPluginAccessors(providers, config);
+        private final KotlinPluginAccessors paccForKotlinPluginAccessors = new KotlinPluginAccessors(providers, config);
+
+        public PluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Group of plugins at <b>plugins.android</b>
+         */
+        public AndroidPluginAccessors getAndroid() {
+            return paccForAndroidPluginAccessors;
+        }
+
+        /**
+         * Group of plugins at <b>plugins.kotlin</b>
+         */
+        public KotlinPluginAccessors getKotlin() {
+            return paccForKotlinPluginAccessors;
+        }
+
+    }
+
+    public static class AndroidPluginAccessors extends PluginFactory {
+
+        public AndroidPluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Plugin provider for <b>android.application</b> with plugin id <b>com.android.application</b> and
+         * with version reference <b>agp</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getApplication() { return createPlugin("android.application"); }
+
+    }
+
+    public static class KotlinPluginAccessors extends PluginFactory {
+
+        public KotlinPluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Plugin provider for <b>kotlin.android</b> with plugin id <b>org.jetbrains.kotlin.android</b> and
+         * with version reference <b>kotlin</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getAndroid() { return createPlugin("kotlin.android"); }
+
+        /**
+         * Plugin provider for <b>kotlin.compose</b> with plugin id <b>org.jetbrains.kotlin.plugin.compose</b> and
+         * with version reference <b>kotlin</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getCompose() { return createPlugin("kotlin.compose"); }
+
+    }
+
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\sources\org\gradle\accessors\dm\LibrariesForLibs.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\sources\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock.java ---
+package org.gradle.accessors.dm;
+
+import org.gradle.api.NonNullApi;
+import org.gradle.api.artifacts.MinimalExternalModuleDependency;
+import org.gradle.plugin.use.PluginDependency;
+import org.gradle.api.artifacts.ExternalModuleDependencyBundle;
+import org.gradle.api.artifacts.MutableVersionConstraint;
+import org.gradle.api.provider.Provider;
+import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.internal.catalog.AbstractExternalDependencyFactory;
+import org.gradle.api.internal.catalog.DefaultVersionCatalog;
+import java.util.Map;
+import org.gradle.api.internal.attributes.ImmutableAttributesFactory;
+import org.gradle.api.internal.artifacts.dsl.CapabilityNotationParser;
+import javax.inject.Inject;
+
+/**
+ * A catalog of dependencies accessible via the {@code libs} extension.
+ */
+@NonNullApi
+public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFactory {
+
+    private final AbstractExternalDependencyFactory owner = this;
+    private final AndroidxLibraryAccessors laccForAndroidxLibraryAccessors = new AndroidxLibraryAccessors(owner);
+    private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
+    private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
+    private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
+
+    @Inject
+    public LibrariesForLibsInPluginsBlock(DefaultVersionCatalog config, ProviderFactory providers, ObjectFactory objects, ImmutableAttributesFactory attributesFactory, CapabilityNotationParser capabilityNotationParser) {
+        super(config, providers, objects, attributesFactory, capabilityNotationParser);
+    }
+
+    /**
+     * Dependency provider for <b>junit</b> with <b>junit:junit</b> coordinates and
+     * with version reference <b>junit</b>
+     * <p>
+     * This dependency was declared in catalog libs.versions.toml
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public Provider<MinimalExternalModuleDependency> getJunit() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return create("junit");
+    }
+
+    /**
+     * Group of libraries at <b>androidx</b>
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public AndroidxLibraryAccessors getAndroidx() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return laccForAndroidxLibraryAccessors;
+    }
+
+    /**
+     * Group of versions at <b>versions</b>
+     */
+    public VersionAccessors getVersions() {
+        return vaccForVersionAccessors;
+    }
+
+    /**
+     * Group of bundles at <b>bundles</b>
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public BundleAccessors getBundles() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return baccForBundleAccessors;
+    }
+
+    /**
+     * Group of plugins at <b>plugins</b>
+     */
+    public PluginAccessors getPlugins() {
+        return paccForPluginAccessors;
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxLibraryAccessors extends SubDependencyFactory {
+        private final AndroidxActivityLibraryAccessors laccForAndroidxActivityLibraryAccessors = new AndroidxActivityLibraryAccessors(owner);
+        private final AndroidxComposeLibraryAccessors laccForAndroidxComposeLibraryAccessors = new AndroidxComposeLibraryAccessors(owner);
+        private final AndroidxCoreLibraryAccessors laccForAndroidxCoreLibraryAccessors = new AndroidxCoreLibraryAccessors(owner);
+        private final AndroidxEspressoLibraryAccessors laccForAndroidxEspressoLibraryAccessors = new AndroidxEspressoLibraryAccessors(owner);
+        private final AndroidxLifecycleLibraryAccessors laccForAndroidxLifecycleLibraryAccessors = new AndroidxLifecycleLibraryAccessors(owner);
+        private final AndroidxUiLibraryAccessors laccForAndroidxUiLibraryAccessors = new AndroidxUiLibraryAccessors(owner);
+
+        public AndroidxLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>appcompat</b> with <b>androidx.appcompat:appcompat</b> coordinates and
+         * with version reference <b>appcompat</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getAppcompat() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.appcompat");
+        }
+
+        /**
+         * Dependency provider for <b>junit</b> with <b>androidx.test.ext:junit</b> coordinates and
+         * with version reference <b>junitVersion</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getJunit() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.junit");
+        }
+
+        /**
+         * Dependency provider for <b>material3</b> with <b>androidx.compose.material3:material3</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getMaterial3() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.material3");
+        }
+
+        /**
+         * Group of libraries at <b>androidx.activity</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxActivityLibraryAccessors getActivity() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxActivityLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.compose</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxComposeLibraryAccessors getCompose() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxComposeLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.core</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxCoreLibraryAccessors getCore() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxCoreLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.espresso</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxEspressoLibraryAccessors getEspresso() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxEspressoLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.lifecycle</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxLifecycleLibraryAccessors getLifecycle() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxLifecycleLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxUiLibraryAccessors getUi() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxUiLibraryAccessors;
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxActivityLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxActivityLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>compose</b> with <b>androidx.activity:activity-compose</b> coordinates and
+         * with version reference <b>activityCompose</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getCompose() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.activity.compose");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxComposeLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxComposeLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>bom</b> with <b>androidx.compose:compose-bom</b> coordinates and
+         * with version reference <b>composeBom</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getBom() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.compose.bom");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxCoreLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxCoreLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ktx</b> with <b>androidx.core:core-ktx</b> coordinates and
+         * with version reference <b>coreKtx</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getKtx() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.core.ktx");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxEspressoLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxEspressoLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>core</b> with <b>androidx.test.espresso:espresso-core</b> coordinates and
+         * with version reference <b>espressoCore</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getCore() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.espresso.core");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxLifecycleLibraryAccessors extends SubDependencyFactory {
+        private final AndroidxLifecycleRuntimeLibraryAccessors laccForAndroidxLifecycleRuntimeLibraryAccessors = new AndroidxLifecycleRuntimeLibraryAccessors(owner);
+
+        public AndroidxLifecycleLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Group of libraries at <b>androidx.lifecycle.runtime</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxLifecycleRuntimeLibraryAccessors getRuntime() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxLifecycleRuntimeLibraryAccessors;
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxLifecycleRuntimeLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxLifecycleRuntimeLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ktx</b> with <b>androidx.lifecycle:lifecycle-runtime-ktx</b> coordinates and
+         * with version reference <b>lifecycleRuntimeKtx</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getKtx() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.lifecycle.runtime.ktx");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxUiLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+        private final AndroidxUiTestLibraryAccessors laccForAndroidxUiTestLibraryAccessors = new AndroidxUiTestLibraryAccessors(owner);
+        private final AndroidxUiToolingLibraryAccessors laccForAndroidxUiToolingLibraryAccessors = new AndroidxUiToolingLibraryAccessors(owner);
+
+        public AndroidxUiLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>ui</b> with <b>androidx.compose.ui:ui</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui");
+        }
+
+        /**
+         * Dependency provider for <b>graphics</b> with <b>androidx.compose.ui:ui-graphics</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getGraphics() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui.graphics");
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui.test</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxUiTestLibraryAccessors getTest() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxUiTestLibraryAccessors;
+        }
+
+        /**
+         * Group of libraries at <b>androidx.ui.tooling</b>
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public AndroidxUiToolingLibraryAccessors getTooling() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return laccForAndroidxUiToolingLibraryAccessors;
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxUiTestLibraryAccessors extends SubDependencyFactory {
+
+        public AndroidxUiTestLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>junit4</b> with <b>androidx.compose.ui:ui-test-junit4</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getJunit4() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui.test.junit4");
+        }
+
+        /**
+         * Dependency provider for <b>manifest</b> with <b>androidx.compose.ui:ui-test-manifest</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getManifest() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui.test.manifest");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class AndroidxUiToolingLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+
+        public AndroidxUiToolingLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>tooling</b> with <b>androidx.compose.ui:ui-tooling</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui.tooling");
+        }
+
+        /**
+         * Dependency provider for <b>preview</b> with <b>androidx.compose.ui:ui-tooling-preview</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getPreview() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("androidx.ui.tooling.preview");
+        }
+
+    }
+
+    public static class VersionAccessors extends VersionFactory  {
+
+        public VersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Version alias <b>activityCompose</b> with value <b>1.9.3</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getActivityCompose() { return getVersion("activityCompose"); }
+
+        /**
+         * Version alias <b>agp</b> with value <b>8.7.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getAgp() { return getVersion("agp"); }
+
+        /**
+         * Version alias <b>appcompat</b> with value <b>1.7.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getAppcompat() { return getVersion("appcompat"); }
+
+        /**
+         * Version alias <b>composeBom</b> with value <b>2024.04.01</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getComposeBom() { return getVersion("composeBom"); }
+
+        /**
+         * Version alias <b>coreKtx</b> with value <b>1.13.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getCoreKtx() { return getVersion("coreKtx"); }
+
+        /**
+         * Version alias <b>espressoCore</b> with value <b>3.6.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
+
+        /**
+         * Version alias <b>junit</b> with value <b>4.13.2</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getJunit() { return getVersion("junit"); }
+
+        /**
+         * Version alias <b>junitVersion</b> with value <b>1.2.1</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getJunitVersion() { return getVersion("junitVersion"); }
+
+        /**
+         * Version alias <b>kotlin</b> with value <b>2.0.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getKotlin() { return getVersion("kotlin"); }
+
+        /**
+         * Version alias <b>lifecycleRuntimeKtx</b> with value <b>2.8.6</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getLifecycleRuntimeKtx() { return getVersion("lifecycleRuntimeKtx"); }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class BundleAccessors extends BundleFactory {
+
+        public BundleAccessors(ObjectFactory objects, ProviderFactory providers, DefaultVersionCatalog config, ImmutableAttributesFactory attributesFactory, CapabilityNotationParser capabilityNotationParser) { super(objects, providers, config, attributesFactory, capabilityNotationParser); }
+
+    }
+
+    public static class PluginAccessors extends PluginFactory {
+        private final AndroidPluginAccessors paccForAndroidPluginAccessors = new AndroidPluginAccessors(providers, config);
+        private final KotlinPluginAccessors paccForKotlinPluginAccessors = new KotlinPluginAccessors(providers, config);
+
+        public PluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Group of plugins at <b>plugins.android</b>
+         */
+        public AndroidPluginAccessors getAndroid() {
+            return paccForAndroidPluginAccessors;
+        }
+
+        /**
+         * Group of plugins at <b>plugins.kotlin</b>
+         */
+        public KotlinPluginAccessors getKotlin() {
+            return paccForKotlinPluginAccessors;
+        }
+
+    }
+
+    public static class AndroidPluginAccessors extends PluginFactory {
+
+        public AndroidPluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Plugin provider for <b>android.application</b> with plugin id <b>com.android.application</b> and
+         * with version reference <b>agp</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getApplication() { return createPlugin("android.application"); }
+
+    }
+
+    public static class KotlinPluginAccessors extends PluginFactory {
+
+        public KotlinPluginAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
+
+        /**
+         * Plugin provider for <b>kotlin.android</b> with plugin id <b>org.jetbrains.kotlin.android</b> and
+         * with version reference <b>kotlin</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getAndroid() { return createPlugin("kotlin.android"); }
+
+        /**
+         * Plugin provider for <b>kotlin.compose</b> with plugin id <b>org.jetbrains.kotlin.plugin.compose</b> and
+         * with version reference <b>kotlin</b>
+         * <p>
+         * This plugin was declared in catalog libs.versions.toml
+         */
+        public Provider<PluginDependency> getCompose() { return createPlugin("kotlin.compose"); }
+
+    }
+
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\dependencies-accessors\9860c951e10eb2f7ebe8f7c17909a4d3ce7d7876\sources\org\gradle\accessors\dm\LibrariesForLibsInPluginsBlock.java ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\executionHistory\executionHistory.bin
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\executionHistory\executionHistory.lock
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\fileHashes\fileHashes.bin
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\fileHashes\fileHashes.lock
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\8.9\fileHashes\resourceHashesCache.bin
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\vcs-1\gc.properties ---
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.gradle\vcs-1\gc.properties ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\.name ---
+command-work-15.11
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\.name ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3.iml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3.iml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\compiler.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="21" />
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\compiler.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\deploymentTargetSelector.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetSelector">
+    <selectionStates>
+      <SelectionState runConfigName="app">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+    </selectionStates>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\deploymentTargetSelector.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\gradle.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\gradle.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\kotlinc.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KotlinJpsPluginSettings">
+    <option name="version" value="2.0.0" />
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\kotlinc.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\migrations.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectMigrations">
+    <option name="MigrateToGradleLocalJavaHome">
+      <set>
+        <option value="$PROJECT_DIR$" />
+      </set>
+    </option>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\migrations.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\misc.xml ---
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\misc.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\runConfigurations.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RunConfigurationProducerService">
+    <option name="ignoredProducers">
+      <set>
+        <option value="com.intellij.execution.junit.AbstractAllInDirectoryConfigurationProducer" />
+        <option value="com.intellij.execution.junit.AllInPackageConfigurationProducer" />
+        <option value="com.intellij.execution.junit.TestInClassConfigurationProducer" />
+        <option value="com.intellij.execution.junit.UniqueIdConfigurationProducer" />
+      </set>
+    </option>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\runConfigurations.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\workspace.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="28307b50-2943-4705-a7d5-8e78b19ce351" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=Default, isTemplate=false, identifier=serial=emulator-5554;connection=5505b4e7)]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2ovBgOvidO0iLdCKipBVY2djGtM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="command-work-15.11.app.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28307b50-2943-4705-a7d5-8e78b19ce351" name="Changes" comment="" />
+      <created>1731740279599</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731740279599</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\workspace.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\caches\deviceStreaming.xml ---
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DeviceStreaming">
+    <option name="deviceSelectionList">
+      <list>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="27" />
+          <option name="brand" value="DOCOMO" />
+          <option name="codename" value="F01L" />
+          <option name="id" value="F01L" />
+          <option name="manufacturer" value="FUJITSU" />
+          <option name="name" value="F-01L" />
+          <option name="screenDensity" value="360" />
+          <option name="screenX" value="720" />
+          <option name="screenY" value="1280" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="28" />
+          <option name="brand" value="DOCOMO" />
+          <option name="codename" value="SH-01L" />
+          <option name="id" value="SH-01L" />
+          <option name="manufacturer" value="SHARP" />
+          <option name="name" value="AQUOS sense2 SH-01L" />
+          <option name="screenDensity" value="480" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2160" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="Lenovo" />
+          <option name="codename" value="TB370FU" />
+          <option name="id" value="TB370FU" />
+          <option name="manufacturer" value="Lenovo" />
+          <option name="name" value="Tab P12" />
+          <option name="screenDensity" value="340" />
+          <option name="screenX" value="1840" />
+          <option name="screenY" value="2944" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="31" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="a51" />
+          <option name="id" value="a51" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy A51" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="akita" />
+          <option name="id" value="akita" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 8a" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="b0q" />
+          <option name="id" value="b0q" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy S22 Ultra" />
+          <option name="screenDensity" value="600" />
+          <option name="screenX" value="1440" />
+          <option name="screenY" value="3088" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="32" />
+          <option name="brand" value="google" />
+          <option name="codename" value="bluejay" />
+          <option name="id" value="bluejay" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 6a" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="caiman" />
+          <option name="id" value="caiman" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 9 Pro" />
+          <option name="screenDensity" value="360" />
+          <option name="screenX" value="960" />
+          <option name="screenY" value="2142" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="comet" />
+          <option name="id" value="comet" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 9 Pro Fold" />
+          <option name="screenDensity" value="390" />
+          <option name="screenX" value="2076" />
+          <option name="screenY" value="2152" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="29" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="crownqlteue" />
+          <option name="id" value="crownqlteue" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy Note9" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="2220" />
+          <option name="screenY" value="1080" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="dm3q" />
+          <option name="id" value="dm3q" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy S23 Ultra" />
+          <option name="screenDensity" value="600" />
+          <option name="screenX" value="1440" />
+          <option name="screenY" value="3088" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="e1q" />
+          <option name="id" value="e1q" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy S24" />
+          <option name="screenDensity" value="480" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2340" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="google" />
+          <option name="codename" value="felix" />
+          <option name="id" value="felix" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel Fold" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="2208" />
+          <option name="screenY" value="1840" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="felix" />
+          <option name="id" value="felix" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel Fold" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="2208" />
+          <option name="screenY" value="1840" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="google" />
+          <option name="codename" value="felix_camera" />
+          <option name="id" value="felix_camera" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel Fold (Camera-enabled)" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="2208" />
+          <option name="screenY" value="1840" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="gts8uwifi" />
+          <option name="id" value="gts8uwifi" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy Tab S8 Ultra" />
+          <option name="screenDensity" value="320" />
+          <option name="screenX" value="1848" />
+          <option name="screenY" value="2960" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="husky" />
+          <option name="id" value="husky" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 8 Pro" />
+          <option name="screenDensity" value="390" />
+          <option name="screenX" value="1008" />
+          <option name="screenY" value="2244" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="30" />
+          <option name="brand" value="motorola" />
+          <option name="codename" value="java" />
+          <option name="id" value="java" />
+          <option name="manufacturer" value="Motorola" />
+          <option name="name" value="G20" />
+          <option name="screenDensity" value="280" />
+          <option name="screenX" value="720" />
+          <option name="screenY" value="1600" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="komodo" />
+          <option name="id" value="komodo" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 9 Pro XL" />
+          <option name="screenDensity" value="360" />
+          <option name="screenX" value="1008" />
+          <option name="screenY" value="2244" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="google" />
+          <option name="codename" value="lynx" />
+          <option name="id" value="lynx" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 7a" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="31" />
+          <option name="brand" value="google" />
+          <option name="codename" value="oriole" />
+          <option name="id" value="oriole" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 6" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="google" />
+          <option name="codename" value="panther" />
+          <option name="id" value="panther" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 7" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="q5q" />
+          <option name="id" value="q5q" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy Z Fold5" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1812" />
+          <option name="screenY" value="2176" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="samsung" />
+          <option name="codename" value="q6q" />
+          <option name="id" value="q6q" />
+          <option name="manufacturer" value="Samsung" />
+          <option name="name" value="Galaxy Z Fold6" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1856" />
+          <option name="screenY" value="2160" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="30" />
+          <option name="brand" value="google" />
+          <option name="codename" value="r11" />
+          <option name="id" value="r11" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel Watch" />
+          <option name="screenDensity" value="320" />
+          <option name="screenX" value="384" />
+          <option name="screenY" value="384" />
+          <option name="type" value="WEAR_OS" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="30" />
+          <option name="brand" value="google" />
+          <option name="codename" value="redfin" />
+          <option name="id" value="redfin" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 5" />
+          <option name="screenDensity" value="440" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2340" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="shiba" />
+          <option name="id" value="shiba" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 8" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2400" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="33" />
+          <option name="brand" value="google" />
+          <option name="codename" value="tangorpro" />
+          <option name="id" value="tangorpro" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel Tablet" />
+          <option name="screenDensity" value="320" />
+          <option name="screenX" value="1600" />
+          <option name="screenY" value="2560" />
+        </PersistentDeviceSelectionData>
+        <PersistentDeviceSelectionData>
+          <option name="api" value="34" />
+          <option name="brand" value="google" />
+          <option name="codename" value="tokay" />
+          <option name="id" value="tokay" />
+          <option name="manufacturer" value="Google" />
+          <option name="name" value="Pixel 9" />
+          <option name="screenDensity" value="420" />
+          <option name="screenX" value="1080" />
+          <option name="screenY" value="2424" />
+        </PersistentDeviceSelectionData>
+      </list>
+    </option>
+  </component>
+</project>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\caches\deviceStreaming.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\inspectionProfiles\Project_Default.xml ---
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ComposePreviewDimensionRespectsLimit" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ComposePreviewMustBeTopLevelFunction" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ComposePreviewNeedsComposableAnnotation" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ComposePreviewNotSupportedInUnitTestFiles" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="GlancePreviewDimensionRespectsLimit" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="GlancePreviewMustBeTopLevelFunction" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="GlancePreviewNeedsComposableAnnotation" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="GlancePreviewNotSupportedInUnitTestFiles" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewAnnotationInFunctionWithParameters" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewApiLevelMustBeValid" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewDeviceShouldUseNewSpec" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewFontScaleMustBeGreaterThanZero" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewMultipleParameterProviders" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PreviewPickerAnnotation" enabled="true" level="ERROR" enabled_by_default="true">
+      <option name="composableFile" value="true" />
+      <option name="previewFile" value="true" />
+    </inspection_tool>
+  </profile>
+</component>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\.idea\inspectionProfiles\Project_Default.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\proguard-rules.pro ---
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\proguard-rules.pro ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\androidTest\java\com\example\command_work_1511\ExampleInstrumentedTest.kt ---
+package com.example.command_work_1511
+
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
+
+import org.junit.Test
+import org.junit.runner.RunWith
+
+import org.junit.Assert.*
+
+/**
+ * Instrumented test, which will execute on an Android device.
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+@RunWith(AndroidJUnit4::class)
+class ExampleInstrumentedTest {
+    @Test
+    fun useAppContext() {
+        // Context of the app under test.
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        assertEquals("com.example.command_work_1511", appContext.packageName)
+    }
+}
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\androidTest\java\com\example\command_work_1511\ExampleInstrumentedTest.kt ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\AndroidManifest.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.command_work_1511">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Commandwork1511"
+        tools:targetApi="31">
+
+        <!-- Main Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Commandwork1511">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- SetPinActivity -->
+        <activity
+            android:name=".SetPinActivity"
+            android:label="@string/set_pin_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- EditPasswordActivity -->
+        <activity
+            android:name=".EditPasswordActivity"
+            android:label="@string/edit_password_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- EnterPinActivity -->
+        <activity
+            android:name=".EnterPinActivity"
+            android:label="@string/enter_pin_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- PasswordListActivity -->
+        <activity
+            android:name=".PasswordListActivity"
+            android:label="@string/password_list_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- AddPasswordActivity -->
+        <activity
+            android:name=".AddPasswordActivity"
+            android:label="@string/add_password_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- PasswordDetailActivity (Добавлено) -->
+        <activity
+            android:name=".PasswordDetailActivity"
+            android:label="@string/password_detail_activity_label"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+    </application>
+</manifest>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\AndroidManifest.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\AddPasswordActivity.java ---
+package com.example.command_work_1511;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
+
+public class AddPasswordActivity extends AppCompatActivity {
+
+    private DatabaseHelper dbHelper;
+    private EditText titleEditText, siteEditText, loginEditText, passwordEditText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_password);  // Убедитесь, что файл activity_add_password.xml существует
+
+        dbHelper = new DatabaseHelper(this);
+
+        // Получаем элементы по правильным ID
+        titleEditText = findViewById(R.id.edit_title);  // Правильный ID
+        siteEditText = findViewById(R.id.edit_site);  // Правильный ID
+        loginEditText = findViewById(R.id.edit_login);  // Правильный ID
+        passwordEditText = findViewById(R.id.edit_password);  // Правильный ID
+
+        // Находим кнопку и устанавливаем обработчик нажатия
+        Button saveButton = findViewById(R.id.btn_save);  // Правильный ID
+        saveButton.setOnClickListener(v -> {
+            String title = titleEditText.getText().toString();
+            String site = siteEditText.getText().toString();
+            String login = loginEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+
+            // Сохраняем новый пароль в базу данных
+            long id = dbHelper.addPassword(title, site, login, password);
+            if (id != -1) {
+                Log.d("AddPassword", "Пароль успешно добавлен с ID: " + id);
+                Toast.makeText(AddPasswordActivity.this, "Пароль добавлен", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.e("AddPassword", "Ошибка при добавлении пароля");
+                Toast.makeText(AddPasswordActivity.this, "Ошибка при добавлении пароля", Toast.LENGTH_SHORT).show();
+            }
+
+            // Закрываем текущую активность и возвращаемся в PasswordListActivity
+            finish();
+        });
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\AddPasswordActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\DatabaseHelper.java ---
+package com.example.command_work_1511;
+import android.util.Log;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+    // Имя базы данных и версия
+    private static final String DATABASE_NAME = "passwords_db";
+    private static final int DATABASE_VERSION = 1;
+
+    // Название таблицы и столбцы
+    public static final String TABLE_PASSWORDS = "passwords";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_SITE = "site";
+    public static final String COLUMN_LOGIN = "login";
+    public static final String COLUMN_PASSWORD = "password";
+
+    // Конструктор
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    // Создание таблицы при первом запуске базы данных
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String createTable = "CREATE TABLE " + TABLE_PASSWORDS + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_TITLE + " TEXT, " +
+                COLUMN_SITE + " TEXT, " +
+                COLUMN_LOGIN + " TEXT, " +
+                COLUMN_PASSWORD + " TEXT)";
+        db.execSQL(createTable);
+    }
+
+    // Обновление базы данных (например, при изменении версии)
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Удаление старой таблицы и создание новой
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PASSWORDS);
+        onCreate(db);
+    }
+
+    // Получение всех паролей
+    public Cursor getAllPasswords() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Запрос для получения всех данных
+        return db.rawQuery("SELECT id AS _id, title, site, login, password FROM " + TABLE_PASSWORDS, null);
+    }
+
+    // Добавление нового пароля
+    public long addPassword(String title, String site, String login, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, title);
+        values.put(COLUMN_SITE, site);
+        values.put(COLUMN_LOGIN, login);
+        values.put(COLUMN_PASSWORD, password);
+        return db.insert(TABLE_PASSWORDS, null, values);
+    }
+
+    // Удаление всех паролей
+    public void deleteAllPasswords() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PASSWORDS, null, null);
+    }
+
+    // Обновление пароля по ID
+    public int updatePassword(long id, String title, String site, String login, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, title);
+        values.put(COLUMN_SITE, site);
+        values.put(COLUMN_LOGIN, login);
+        values.put(COLUMN_PASSWORD, password);
+        return db.update(TABLE_PASSWORDS, values, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+
+    // Получение пароля по ID
+    public Password getPasswordById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_PASSWORDS, null, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // Получаем индексы столбцов с проверкой на отрицательные значения
+            int titleIndex = cursor.getColumnIndex(COLUMN_TITLE);
+            int siteIndex = cursor.getColumnIndex(COLUMN_SITE);
+            int loginIndex = cursor.getColumnIndex(COLUMN_LOGIN);
+            int passwordIndex = cursor.getColumnIndex(COLUMN_PASSWORD);
+
+            // Логирование, если один из индексов равен -1, это значит, что столбец не найден
+            if (titleIndex == -1 || siteIndex == -1 || loginIndex == -1 || passwordIndex == -1) {
+                Log.e("DatabaseHelper", "One or more columns not found!");
+                cursor.close();
+                return null;
+            }
+
+            // Если индексы валидны (больше или равны 0), извлекаем данные
+            String title = cursor.getString(titleIndex);
+            String site = cursor.getString(siteIndex);
+            String login = cursor.getString(loginIndex);
+            String password = cursor.getString(passwordIndex);
+            cursor.close();
+
+            return new Password(title, site, login, password); // Возвращаем объект Password
+        }
+        cursor.close();
+        return null; // Если курсор пуст, возвращаем null
+    }
+    public Cursor getAllPasswordsCursor() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(
+                "passwords",         // Название таблицы
+                new String[]{"title", "site"},  // Только нужные столбцы
+                null,                // WHERE условие (null, если не нужно)
+                null,                // Аргументы для WHERE
+                null,                // GROUP BY
+                null,                // HAVING
+                null                 // ORDER BY
+        );
+    }
+    public boolean deletePasswordById(long passwordId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_PASSWORDS, "_id = ?", new String[]{String.valueOf(passwordId)});
+        db.close();
+        return rowsDeleted > 0;  // Если удалено хотя бы 1 строка, возвращаем true
+    }
+    public boolean deletePassword(long passwordId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete("passwords", "id = ?", new String[]{String.valueOf(passwordId)});
+        return rowsAffected > 0;
+    }
+
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\DatabaseHelper.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EditPasswordActivity.java ---
+package com.example.command_work_1511;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EditPasswordActivity extends AppCompatActivity {
+
+    private DatabaseHelper dbHelper;
+    private EditText titleInput, siteInput, loginInput, passwordInput;
+    private Button saveButton;
+    private long passwordId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_password);
+
+        dbHelper = new DatabaseHelper(this);
+
+        // Инициализация UI
+        titleInput = findViewById(R.id.title_input);
+        siteInput = findViewById(R.id.site_input);
+        loginInput = findViewById(R.id.login_input);
+        passwordInput = findViewById(R.id.password_input);
+        saveButton = findViewById(R.id.btn_save);
+
+        // Получаем ID пароля, который будем редактировать
+        passwordId = getIntent().getLongExtra("password_id", -1);
+
+        // Загружаем текущие данные пароля
+        loadPasswordForEdit();
+
+        // Обработчик кнопки для сохранения изменений
+        saveButton.setOnClickListener(v -> {
+            String title = titleInput.getText().toString();
+            String site = siteInput.getText().toString();
+            String login = loginInput.getText().toString();
+            String password = passwordInput.getText().toString();
+
+            // Обновляем пароль в базе данных
+            dbHelper.updatePassword(passwordId, title, site, login, password);
+            Toast.makeText(this, "Пароль обновлен", Toast.LENGTH_SHORT).show();
+            finish();  // Возвращаемся назад
+        });
+    }
+
+    // Метод для загрузки текущих данных пароля в поля редактирования
+    private void loadPasswordForEdit() {
+        Password password = dbHelper.getPasswordById(passwordId);
+        if (password != null) {
+            titleInput.setText(password.getTitle());
+            siteInput.setText(password.getSite());
+            loginInput.setText(password.getLogin());
+            passwordInput.setText(password.getPassword());
+        }
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EditPasswordActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EncryptionUtils.java ---
+package com.example.command_work_1511;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class EncryptionUtils {
+
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EncryptionUtils.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EnterPinActivity.java ---
+package com.example.command_work_1511;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EnterPinActivity extends AppCompatActivity {
+
+    private EditText pinEditText;
+    private Button confirmButton;
+    private SharedPreferences sharedPreferences;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_enter_pin);
+
+        pinEditText = findViewById(R.id.pinEditText);
+        confirmButton = findViewById(R.id.confirmButton);
+        sharedPreferences = getSharedPreferences("appPrefs", Context.MODE_PRIVATE);
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String enteredPin = pinEditText.getText().toString();
+                String savedPin = sharedPreferences.getString("userPin", "");
+
+                if (enteredPin.equals(savedPin)) {
+                    // Если PIN правильный, переходим в основную активность
+                    startMainActivity();
+                } else {
+                    // Если PIN неверный, показываем сообщение
+                    Toast.makeText(EnterPinActivity.this, "Неверный PIN", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(EnterPinActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();  // Закрываем EnterPinActivity
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\EnterPinActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\MainActivity.java ---
+package com.example.command_work_1511;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText pinInput;
+    private Button loginButton;
+    private Button forgotPinButton; // Кнопка для восстановления PIN
+    private int failedAttempts = 0; // Счётчик неудачных попыток
+    private DatabaseHelper dbHelper; // Для работы с базой данных
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        pinInput = findViewById(R.id.pin_input);
+        loginButton = findViewById(R.id.btn_login);
+        forgotPinButton = findViewById(R.id.btn_forgot_pin);
+
+        // Инициализируем helper для работы с базой данных
+        dbHelper = new DatabaseHelper(this);
+
+        // Проверяем, установлен ли ПИН-код
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        if (prefs.getString("hashed_pin", null) == null) {
+            // Если ПИН-код не установлен, перенаправляем пользователя на установку ПИН-кода
+            Intent intent = new Intent(MainActivity.this, SetPinActivity.class);
+            startActivity(intent);
+            finish(); // Закрываем текущую активность
+        }
+
+        loginButton.setOnClickListener(v -> {
+            String enteredPin = pinInput.getText().toString();
+            if (checkPin(enteredPin)) {
+                // Переходим к списку паролей
+                Intent intent = new Intent(MainActivity.this, PasswordListActivity.class);
+                startActivity(intent);
+                finish(); // Закрываем текущую активность
+            } else {
+                failedAttempts++; // Увеличиваем счетчик неудачных попыток
+                Toast.makeText(this, "Неверный ПИН-код", Toast.LENGTH_SHORT).show();
+
+                // Если попытки ввода неверные, показываем кнопку "Забыли пароль?"
+                if (failedAttempts >= 3) {
+                    forgotPinButton.setVisibility(Button.VISIBLE);
+                }
+            }
+        });
+
+        forgotPinButton.setOnClickListener(v -> {
+            // Показываем диалоговое окно с подтверждением удаления PIN-кода и паролей
+            new AlertDialog.Builder(this)
+                    .setTitle("Вы уверены?")
+                    .setMessage("Внимание! Все сохраненные пароли будут удалены. Вы уверены, что хотите продолжить?")
+                    .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Очистим PIN-код и все сохраненные пароли
+                            clearPin();
+                            clearPasswords();
+
+                            // Перенаправим пользователя на установку нового PIN-кода
+                            Intent intent = new Intent(MainActivity.this, SetPinActivity.class);
+                            startActivity(intent);
+                            finish(); // Закрываем текущую активность
+                        }
+                    })
+                    .setNegativeButton("Отмена", null)
+                    .show();
+        });
+    }
+
+    // Метод для сохранения ПИН-кода
+    private void savePin(String pin) {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String hashedPin = EncryptionUtils.hashPassword(pin);
+        editor.putString("hashed_pin", hashedPin);
+        editor.apply();
+        Log.d("PIN", "Сохраненный ПИН-код: " + hashedPin);
+    }
+
+    // Метод для проверки ПИН-кода
+    private boolean checkPin(String enteredPin) {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        String savedHashedPin = prefs.getString("hashed_pin", null);
+        if (savedHashedPin == null) {
+            Toast.makeText(this, "ПИН-код не установлен", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        String enteredHashedPin = EncryptionUtils.hashPassword(enteredPin);
+        Log.d("PIN", "Введенный ПИН-код (хэш): " + enteredHashedPin);
+        return savedHashedPin.equals(enteredHashedPin);
+    }
+
+    // Метод для очистки сохраненного ПИН-кода
+    private void clearPin() {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("hashed_pin");
+        editor.apply();
+    }
+
+    // Метод для удаления всех сохраненных паролей
+    private void clearPasswords() {
+        dbHelper.deleteAllPasswords();
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\MainActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\Password.java ---
+package com.example.command_work_1511;
+
+public class Password {
+    private long id;  // Уникальный идентификатор
+    private String title;  // Название
+    private String site;   // Сайт
+    private String login;  // Логин
+    private String password; // Пароль
+
+    // Конструктор с id
+    public Password(String title, String site, String login, String password) {
+        this.id = id;
+        this.title = title;
+        this.site = site;
+        this.login = login;
+        this.password = password;
+    }
+
+    // Геттеры
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\Password.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordAdapter.java ---
+package com.example.command_work_1511;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.TextView;
+
+public class PasswordAdapter extends CursorAdapter {
+
+    public PasswordAdapter(Context context, Cursor cursor) {
+        super(context, cursor, 0);
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        // Получаем элементы из разметки элемента списка (название и сайт)
+        TextView titleView = view.findViewById(R.id.text_view_title); // Для названия
+        TextView siteView = view.findViewById(R.id.text_view_site);   // Для сайта
+
+        // Получаем данные из курсора
+        String title = cursor.getString(cursor.getColumnIndex("title"));
+        String site = cursor.getString(cursor.getColumnIndex("site"));
+
+        // Устанавливаем данные в соответствующие TextView
+        titleView.setText(title);  // Название
+        siteView.setText(site);    // Сайт
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        // Создаем новый элемент списка, используя разметку item_password.xml
+        return LayoutInflater.from(context).inflate(R.layout.item_password, parent, false);
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordAdapter.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordDetailActivity.java ---
+package com.example.command_work_1511;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PasswordDetailActivity extends AppCompatActivity {
+
+    private EditText passwordEditText;
+    private ImageView eyeIcon;
+    private TextView titleTextView;
+    private TextView siteTextView;
+    private TextView loginTextView;
+    private boolean isPasswordVisible = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_password_detail);
+
+        passwordEditText = findViewById(R.id.edit_text_password);
+        eyeIcon = findViewById(R.id.eye_icon);
+        titleTextView = findViewById(R.id.text_view_title);
+        siteTextView = findViewById(R.id.text_view_site);
+        loginTextView = findViewById(R.id.text_view_login);
+
+        // Получаем данные из Intent
+        long passwordId = getIntent().getLongExtra("password_id", -1);
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        Password password = dbHelper.getPasswordById(passwordId);
+
+        if (password != null) {
+            titleTextView.setText("Название: " + password.getTitle());
+            siteTextView.setText("Сайт: " + password.getSite());
+            loginTextView.setText("Логин: " + password.getLogin());
+
+            passwordEditText.setText(password.getPassword());
+            passwordEditText.setSelection(password.getPassword().length()); // Устанавливаем курсор в конец текста
+            passwordEditText.setInputType(129); // Скрываем пароль
+        }
+
+        eyeIcon.setOnClickListener(v -> togglePasswordVisibility());
+
+        // Иконка для удаления пароля
+        ImageView deleteIcon = findViewById(R.id.delete_icon);
+        deleteIcon.setOnClickListener(v -> showPinDialog(passwordId));
+    }
+
+    private void showPinDialog(final long passwordId) {
+        // Создаем диалог для ввода пин-кода
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Введите Пин-код");
+
+        final EditText pinEditText = new EditText(this);
+        pinEditText.setInputType(129); // Для ввода только чисел
+        builder.setView(pinEditText);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String enteredPin = pinEditText.getText().toString().trim();
+                checkPinAndDeletePassword(enteredPin, passwordId);
+            }
+        });
+
+        builder.setNegativeButton("Отмена", null);
+        builder.show();
+    }
+
+    private void checkPinAndDeletePassword(String enteredPin, long passwordId) {
+        // Получаем сохраненный пин-код
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String savedPin = sharedPreferences.getString("PIN", null);
+
+        // Логируем сохраненный пин-код и введенный пин-код для отладки
+        Log.d("PasswordDetailActivity", "Saved PIN: " + savedPin);
+        Log.d("PasswordDetailActivity", "Entered PIN: " + enteredPin);
+
+        if (savedPin != null && savedPin.equals(enteredPin.trim())) {  // Убираем пробелы для точного сравнения
+            deletePassword(passwordId);
+        } else {
+            Toast.makeText(this, "Неверный пин-код", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deletePassword(long passwordId) {
+        // Удаляем пароль из базы данных
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        dbHelper.deletePasswordById(passwordId);
+
+        // Перенаправляем на главный экран с флагом "пароль удален"
+        redirectToMainMenu();
+    }
+
+    private void redirectToMainMenu() {
+        Intent intent = new Intent(PasswordDetailActivity.this, PasswordListActivity.class);
+        intent.putExtra("password_deleted", true);  // Флаг для отображения сообщения об удалении
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  // Очищаем стек
+        startActivity(intent);
+    }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            passwordEditText.setInputType(129); // Скрываем пароль
+            eyeIcon.setImageResource(R.drawable.ic_eye_off); // Иконка закрытого глаза
+        } else {
+            passwordEditText.setInputType(1); // Показываем пароль
+            eyeIcon.setImageResource(R.drawable.ic_eye_on); // Иконка открытого глаза
+        }
+        isPasswordVisible = !isPasswordVisible;
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordDetailActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordListActivity.java ---
+package com.example.command_work_1511;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PasswordListActivity extends AppCompatActivity {
+
+    private DatabaseHelper dbHelper;
+    private PasswordAdapter adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_password_list);
+
+        dbHelper = new DatabaseHelper(this);
+        ListView passwordList = findViewById(R.id.password_list);
+        Button addButton = findViewById(R.id.btn_add);
+
+        // Инициализация адаптера
+        adapter = new PasswordAdapter(this, null);
+        passwordList.setAdapter(adapter);
+
+        // Обновление списка паролей
+        updatePasswordList();
+
+        // Обработка кнопки добавления
+        addButton.setOnClickListener(v -> {
+            Intent intent = new Intent(PasswordListActivity.this, AddPasswordActivity.class);
+            startActivity(intent);
+        });
+
+        // Обработка клика по элементу списка
+        passwordList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(PasswordListActivity.this, PasswordDetailActivity.class);
+            intent.putExtra("password_id", id); // Передаем ID пароля в новую активность
+            startActivity(intent);
+        });
+    }
+
+    // Метод для обновления списка паролей
+    private void updatePasswordList() {
+        Cursor cursor = dbHelper.getAllPasswords();
+
+        if (cursor != null && cursor.getCount() > 0) {
+            adapter.changeCursor(cursor); // Обновляем адаптер с новым курсором
+        } else {
+            adapter.changeCursor(null); // Очищаем адаптер, если данных нет
+            Toast.makeText(this, "Нет сохраненных паролей", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePasswordList();
+        // Проверка, если нужно показать Toast
+        if (getIntent().getBooleanExtra("password_deleted", false)) {
+            Toast.makeText(this, "Пароль удален", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (adapter != null) {
+            adapter.changeCursor(null); // Закрываем курсор в адаптере
+        }
+    }
+
+
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\PasswordListActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\SetPinActivity.java ---
+package com.example.command_work_1511;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SetPinActivity extends AppCompatActivity {
+
+    private EditText pinInput;
+    private EditText confirmPinInput;
+    private Button setPinButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_set_pin);  // Используем ресурс activity_set_pin из вашего проекта
+
+        pinInput = findViewById(R.id.pin_input);  // Используем правильный ID для EditText
+        confirmPinInput = findViewById(R.id.pin_confirm_input);  // Для второго ввода PIN
+        setPinButton = findViewById(R.id.btn_set_pin);  // Кнопка для установки PIN
+
+        setPinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pin = pinInput.getText().toString();
+                String confirmPin = confirmPinInput.getText().toString();
+
+                // Проверяем, что PIN совпадает при вводе
+                if (!pin.isEmpty() && !confirmPin.isEmpty()) {
+                    if (pin.equals(confirmPin)) {
+                        // Хэшируем PIN-код перед сохранением
+                        String hashedPin = EncryptionUtils.hashPassword(pin);
+
+                        // Сохраняем PIN в SharedPreferences
+                        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("hashed_pin", hashedPin);
+                        editor.apply();
+
+                        // Переходим на экран ввода PIN-кода
+                        Toast.makeText(SetPinActivity.this, "PIN установлен", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SetPinActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(SetPinActivity.this, "ПИН-коды не совпадают", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SetPinActivity.this, "Пожалуйста, введите ПИН-код", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\SetPinActivity.java ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Color.kt ---
+package com.example.command_work_1511.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Color.kt ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Theme.kt ---
+package com.example.command_work_1511.ui.theme
+
+import android.app.Activity
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+
+private val DarkColorScheme = darkColorScheme(
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40
+
+    /* Other default colors to override
+    background = Color(0xFFFFFBFE),
+    surface = Color(0xFFFFFBFE),
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onTertiary = Color.White,
+    onBackground = Color(0xFF1C1B1F),
+    onSurface = Color(0xFF1C1B1F),
+    */
+)
+
+@Composable
+fun Commandwork1511Theme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Theme.kt ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Type.kt ---
+package com.example.command_work_1511.ui.theme
+
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+
+// Set of Material typography styles to start with
+val Typography = Typography(
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    )
+    /* Other default text styles to override
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
+    )
+    */
+)
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\java\com\example\command_work_1511\ui\theme\Type.kt ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_eye_off.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,6C8.69,6 5.62,7.68 3.72,10.5C2.88,11.61 2.22,12.87 1.72,14.03C1.25,15.08 1.25,16.15 1.72,17.2C2.22,18.36 2.88,19.62 3.72,20.73C5.62,23.55 8.69,25 12,25C15.31,25 18.38,23.32 20.28,20.5C21.12,19.39 21.78,18.13 22.28,16.97C22.75,15.92 22.75,14.85 22.28,13.8C21.78,12.64 21.12,11.38 20.28,10.27C18.38,7.45 15.31,6 12,6M12,8.5C14.67,8.5 17,10.03 18,12.5C17,14.97 14.67,16.5 12,16.5C9.33,16.5 7,14.97 6,12.5C7,10.03 9.33,8.5 12,8.5M12,10C10.67,10 9.5,10.91 9.5,12C9.5,13.09 10.67,14 12,14C13.33,14 14.5,13.09 14.5,12C14.5,10.91 13.33,10 12,10Z"/>
+</vector>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_eye_off.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_eye_on.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,6C8.69,6 5.62,7.68 3.72,10.5C2.88,11.61 2.22,12.87 1.72,14.03C1.25,15.08 1.25,16.15 1.72,17.2C2.22,18.36 2.88,19.62 3.72,20.73C5.62,23.55 8.69,25 12,25C15.31,25 18.38,23.32 20.28,20.5C21.12,19.39 21.78,18.13 22.28,16.97C22.75,15.92 22.75,14.85 22.28,13.8C21.78,12.64 21.12,11.38 20.28,10.27C18.38,7.45 15.31,6 12,6M12,8.5C14.67,8.5 17,10.03 18,12.5C17,14.97 14.67,16.5 12,16.5C9.33,16.5 7,14.97 6,12.5C7,10.03 9.33,8.5 12,8.5M12,10C10.67,10 9.5,10.91 9.5,12C9.5,13.09 10.67,14 12,14C13.33,14 14.5,13.09 14.5,12C14.5,10.91 13.33,10 12,10Z"/>
+</vector>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_eye_on.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_launcher_background.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M0,0h108v108h-108z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9,0L9,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,0L19,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M29,0L29,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,0L39,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M49,0L49,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M59,0L59,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M69,0L69,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M79,0L79,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M89,0L89,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M99,0L99,108"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,9L108,9"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,19L108,19"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,29L108,29"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,39L108,39"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,49L108,49"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,59L108,59"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,69L108,69"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,79L108,79"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,89L108,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,99L108,99"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,29L89,29"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,39L89,39"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,49L89,49"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,59L89,59"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,69L89,69"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M19,79L89,79"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M29,19L29,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,19L39,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M49,19L49,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M59,19L59,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M69,19L69,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M79,19L79,89"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+</vector>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_launcher_background.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_launcher_foreground.xml ---
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="85.84757"
+                android:endY="92.4963"
+                android:startX="42.9492"
+                android:startY="49.59793"
+                android:type="linear">
+                <item
+                    android:color="#44000000"
+                    android:offset="0.0" />
+                <item
+                    android:color="#00000000"
+                    android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="nonZero"
+        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
+        android:strokeWidth="1"
+        android:strokeColor="#00000000" />
+</vector>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\drawable\ic_launcher_foreground.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_add_password.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Название"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edit_site"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Сайт"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edit_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Логин"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Пароль"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сохранить" />
+
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_add_password.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_edit_password.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Поле для редактирования заголовка -->
+    <EditText
+        android:id="@+id/title_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Заголовок"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Поле для ввода заголовка пароля" />
+
+    <!-- Поле для редактирования сайта -->
+    <EditText
+        android:id="@+id/site_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Сайт"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Поле для ввода сайта" />
+
+    <!-- Поле для редактирования логина -->
+    <EditText
+        android:id="@+id/login_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Логин"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Поле для ввода логина" />
+
+    <!-- Поле для редактирования пароля -->
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Пароль"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Поле для ввода пароля"
+        android:inputType="textPassword" />  <!-- Изначально текст скрыт -->
+
+    <!-- Кнопка для сохранения изменений -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить изменения"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_edit_password.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_enter_pin.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/pinEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Введите PIN"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подтвердить"/>
+    <Button
+        android:id="@+id/btn_forgot_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Забыли пароль?"
+        android:visibility="gone" /> <!-- Сначала скрыта -->
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_enter_pin.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_main.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/pin_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите PIN-код"
+        android:inputType="textPassword"
+        android:maxLength="4" />
+    <Button
+        android:id="@+id/btn_forgot_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Забыли ПИН?"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Войти" />
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_main.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_password_detail.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Заголовок -->
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Название"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Сайт -->
+    <TextView
+        android:id="@+id/text_view_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сайт"
+        android:textSize="16sp" />
+
+    <!-- Логин -->
+    <TextView
+        android:id="@+id/text_view_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Логин"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Пароль"
+        android:enabled="false" />
+
+    <!-- Иконка глазика для показа/скрытия пароля -->
+    <ImageView
+        android:id="@+id/eye_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="start"
+        android:contentDescription="Toggle password visibility"
+        android:src="@drawable/ic_eye_off" />
+
+    <ImageView
+        android:id="@+id/delete_icon"
+        android:layout_width="94dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Удалить пароль"
+        android:rotationX="2"
+        android:src="@drawable/ic_delete" />
+
+
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_password_detail.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_password_list.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/password_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить пароль" />
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_password_list.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_set_pin.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- Ввод нового PIN-кода -->
+    <EditText
+        android:id="@+id/pin_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_new_pin"
+        android:inputType="textPassword"
+        android:maxLength="4"
+        android:autofillHints="newPassword"
+        android:contentDescription="@string/desc_new_pin"
+        android:padding="16dp" />
+
+    <!-- Подтверждение нового PIN-кода -->
+    <EditText
+        android:id="@+id/pin_confirm_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_confirm_pin"
+        android:inputType="textPassword"
+        android:maxLength="4"
+        android:autofillHints="newPassword"
+        android:contentDescription="@string/desc_confirm_pin"
+        android:padding="16dp"/>
+
+    <!-- Кнопка для установки PIN -->
+    <Button
+        android:id="@+id/btn_set_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_pin"
+        android:contentDescription="@string/desc_set_pin"
+        android:padding="16dp" />
+
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\activity_set_pin.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\item_password.xml ---
+<!-- res/layout/item_password.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+
+<TextView
+    android:id="@+id/text_view_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Название"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:textColor="#000000"
+    android:layout_marginBottom="8dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:singleLine="true"/>
+
+    <!-- Сайт с меньшим размером шрифта -->
+<TextView
+    android:id="@+id/text_view_site"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Сайт"
+    android:textSize="16sp"
+    android:textColor="#555555"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:singleLine="true"/>
+
+</LinearLayout>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\layout\item_password.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-anydpi\ic_launcher.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-anydpi\ic_launcher.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-anydpi\ic_launcher_round.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-anydpi\ic_launcher_round.xml ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-hdpi\ic_launcher.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-hdpi\ic_launcher_round.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-mdpi\ic_launcher.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-mdpi\ic_launcher_round.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xhdpi\ic_launcher.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xhdpi\ic_launcher_round.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xxhdpi\ic_launcher.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xxhdpi\ic_launcher_round.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xxxhdpi\ic_launcher.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\mipmap-xxxhdpi\ic_launcher_round.webp
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\colors.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="primary">#6200EE</color>
+    <color name="primary_dark">#3700B3</color>
+    <color name="accent">#03DAC5</color>
+</resources>
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\colors.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\strings.xml ---
+<resources>
+    <string name="app_name">command-work-15.11</string>
+    <string name="hint_new_pin">Введите новый PIN-код</string>
+    <string name="hint_confirm_pin">Подтвердите новый PIN-код</string>
+    <string name="set_pin">Установить PIN</string>
+
+    <!-- Описание для доступности -->
+    <string name="desc_new_pin">Поле для ввода нового PIN-кода</string>
+    <string name="desc_confirm_pin">Поле для подтверждения нового PIN-кода</string>
+    <string name="desc_set_pin">Кнопка для установки PIN-кода</string>
+    <string name="set_pin_activity_label">Установка PIN-кода</string>
+    <!-- Строка для PasswordListActivity на русском -->
+    <string name="password_list_activity_label">Список Паролей</string>
+    <string name="add_password_activity_label">Add Password</string>
+    <string name="enter_pin_activity_label">Введите PIN-код</string>
+    <string name="edit_password_activity_label">Редактирование пароля</string>
+    <string name="password_detail_activity_label">Детали пароля</string>
+</resources>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\strings.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\themes.xml ---
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Commandwork1511" parent="Theme.AppCompat.Light"/>
+</resources>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\values\themes.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\xml\backup_rules.xml ---
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older that API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!--
+   <include domain="sharedpref" path="."/>
+   <exclude domain="sharedpref" path="device.xml"/>
+-->
+</full-backup-content>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\xml\backup_rules.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\xml\data_extraction_rules.xml ---
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample data extraction rules file; uncomment and customize as necessary.
+   See https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   for details.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- TODO: Use <include> and <exclude> to control what is backed up.
+        <include .../>
+        <exclude .../>
+        -->
+    </cloud-backup>
+    <!--
+    <device-transfer>
+        <include .../>
+        <exclude .../>
+    </device-transfer>
+    -->
+</data-extraction-rules>
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\app\src\main\res\xml\data_extraction_rules.xml ---
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle\libs.versions.toml ---
+[versions]
+agp = "8.7.0"
+kotlin = "2.0.0"
+coreKtx = "1.13.1"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+lifecycleRuntimeKtx = "2.8.6"
+activityCompose = "1.9.3"
+composeBom = "2024.04.01"
+appcompat = "1.7.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle\libs.versions.toml ---
+C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle\wrapper\gradle-wrapper.jar
+Failed to decode the file, as it is not saved with UTF-8 encoding.
+--- START FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle\wrapper\gradle-wrapper.properties ---
+#Fri Nov 15 11:04:29 UZT 2024
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+
+--- END FILE: C:/Users/Bobur/Downloads/commandwork1511-783b8449fb37e13689e8c52395eaee06ed5d14d3\gradle\wrapper\gradle-wrapper.properties ---
