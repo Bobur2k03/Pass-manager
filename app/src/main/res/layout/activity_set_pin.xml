@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="#548909"
+    >
 
     <!-- Ввод нового PIN-кода -->
     <EditText
@@ -33,7 +35,9 @@
     <!-- Кнопка для установки PIN -->
     <Button
         android:id="@+id/btn_set_pin"
-        android:layout_width="match_parent"
+        android:layout_width="200"
+        android:layout_gravity="center_horizontal"
+        android:background="#546372"
         android:layout_height="wrap_content"
         android:text="@string/set_pin"
         android:contentDescription="@string/desc_set_pin"

@@ -3,15 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/pin_input"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Введите PIN-код"
         android:inputType="textPassword"
         android:maxLength="4" />
+
     <Button
         android:id="@+id/btn_forgot_pin"
         android:layout_width="match_parent"
@@ -21,7 +23,9 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
         android:text="Войти" />
 </LinearLayout>
