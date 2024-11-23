@@ -5,10 +5,8 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center_vertical"
-    android:background="#548909"
-    >
+    android:background="@color/main_interface">
 
-    <!-- Ввод нового PIN-кода -->
     <EditText
         android:id="@+id/pin_input"
         android:layout_width="match_parent"
@@ -17,10 +15,9 @@
         android:inputType="textPassword"
         android:maxLength="4"
         android:autofillHints="newPassword"
+        android:background="@color/enter_zone"
         android:contentDescription="@string/desc_new_pin"
         android:padding="16dp" />
-
-    <!-- Подтверждение нового PIN-кода -->
     <EditText
         android:id="@+id/pin_confirm_input"
         android:layout_width="match_parent"
@@ -28,16 +25,17 @@
         android:hint="@string/hint_confirm_pin"
         android:inputType="textPassword"
         android:maxLength="4"
+        android:background="@color/enter_zone"
+        android:layout_marginVertical="10dp"
         android:autofillHints="newPassword"
         android:contentDescription="@string/desc_confirm_pin"
         android:padding="16dp"/>
 
-    <!-- Кнопка для установки PIN -->
     <Button
         android:id="@+id/btn_set_pin"
-        android:layout_width="200"
+        android:layout_width="200dp"
         android:layout_gravity="center_horizontal"
-        android:background="#546372"
+        android:background="@color/confirm_btn"
         android:layout_height="wrap_content"
         android:text="@string/set_pin"
         android:contentDescription="@string/desc_set_pin"
